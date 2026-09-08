@@ -1,7 +1,3 @@
-# 原文格式
-
-每天一个 Markdown 文件，文件名为 `YYYY-MM-DD.md`。当天的所有视频都写在同一个文件中，按发布时间排序。
-
 ```markdown
 # 抖音视频原文 | YYYY-MM-DD
 
@@ -9,15 +5,18 @@
 
 <a id="post-id"></a>
 
-## 视频标题
+## 博主名称：一句话总结 &#x20;
 
 - 博主：博主名称
-- 发布时间：YYYY-MM-DDTHH:mm:ss+08:00
+- 发布时间：YYYY-MM-DD HH:mm
 - 来源：[抖音原视频](视频链接)
 
-### 原始文本
+<details>
+<summary>原始文本</summary>
 
 视频原文
+
+</details>
 
 ---
 ```
