@@ -13,8 +13,14 @@
     .eyebrow { color:var(--accent); font-size:13px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
     h1 { margin:6px 0 10px; font-size:clamp(28px, 5vw, 44px); line-height:1.2; letter-spacing:0; }
     .date { color:var(--muted); }
-    .summary { margin:24px 0 34px; padding:18px 20px; border-left:4px solid var(--accent); background:var(--warm); border-radius:6px; font-size:18px; }
-    .summary strong { display:block; margin-bottom:3px; font-size:13px; color:#8a5b00; letter-spacing:.04em; }
+    .summary { margin:24px 0 34px; padding:20px; border-left:4px solid var(--accent); background:var(--warm); border-radius:8px; }
+    .summary-title { display:flex; align-items:baseline; justify-content:space-between; gap:16px; margin-bottom:14px; }
+    .summary-title strong { font-size:18px; line-height:1.3; }
+    .summary-title span { color:#8a5b00; font-size:13px; white-space:nowrap; }
+    .summary-list { display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin:0; padding:0; list-style:none; }
+    .summary-list li { padding:14px; background:rgba(255,255,255,.72); border:1px solid #f0dfb6; border-radius:7px; }
+    .summary-list b { display:block; margin-bottom:5px; color:#805500; font-size:14px; }
+    .summary-list p { margin:0; color:#303b45; font-size:15px; line-height:1.55; }
     .video { margin:18px 0; background:#fff; border:1px solid var(--line); border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(24,38,51,.04); }
     .video-head { padding:22px 24px 18px; }
     h2 { margin:0 0 12px; font-size:21px; line-height:1.4; }
@@ -23,13 +29,20 @@
     .meta a:hover { text-decoration:underline; }
     .tags { display:flex; flex-wrap:wrap; gap:7px; margin-top:14px; }
     .tag { padding:3px 10px; border-radius:999px; color:#14527f; background:#e8f3fb; font-size:13px; }
+    .fact-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); margin:18px 0 0; border:1px solid var(--line); border-radius:7px; overflow:hidden; background:var(--soft); }
+    .fact { display:grid; grid-template-columns:76px 1fr; gap:10px; padding:12px 14px; min-width:0; }
+    .fact:nth-child(even) { border-left:1px solid var(--line); }
+    .fact:nth-child(n+3) { border-top:1px solid var(--line); }
+    .fact dt { margin:0; color:var(--muted); font-size:13px; font-weight:700; white-space:nowrap; }
+    .fact dd { margin:0; color:#303b45; font-size:14px; line-height:1.55; }
     details { border-top:1px solid var(--line); }
     summary { cursor:pointer; padding:13px 24px; color:var(--accent); font-weight:600; user-select:none; }
     summary:hover { background:var(--soft); }
     .transcript { padding:0 24px 24px; color:#303b45; white-space:pre-wrap; word-break:break-word; }
     .transcript-label { margin:0 0 8px; color:var(--muted); font-size:13px; }
     footer { margin-top:36px; color:var(--muted); font-size:13px; text-align:center; }
-    @media (max-width:600px) { main { width:min(100% - 20px, 980px); padding-top:28px; } .video-head, summary, .transcript { padding-left:16px; padding-right:16px; } h2 { font-size:19px; } }
+    @media (max-width:700px) { .summary-list, .fact-grid { grid-template-columns:1fr; } .fact:nth-child(even) { border-left:0; } .fact:nth-child(n+2) { border-top:1px solid var(--line); } }
+    @media (max-width:600px) { main { width:min(100% - 20px, 980px); padding-top:28px; } .video-head, summary, .transcript { padding-left:16px; padding-right:16px; } .summary-title { align-items:flex-start; flex-direction:column; gap:2px; } h2 { font-size:19px; } .fact { grid-template-columns:68px 1fr; padding:11px 12px; } }
   </style>
 </head>
 <body>
@@ -39,9 +52,25 @@
       <h1>抖音 AI 新闻</h1>
       <div class="date">2026 年 9 月 5 日 · 4 条视频 · 按发布时间排序</div>
     </header>
-    <section class="summary" aria-label="今日总结">
-      <strong>今日一句话</strong>
-      AI 正从生成内容走向直接操作软件、跨工具完成任务，同时个人也需要重新建立以目标和交付标准为核心的协作体系。
+    <section class="summary" aria-labelledby="daily-brief-title">
+      <div class="summary-title">
+        <strong id="daily-brief-title">今日 30 秒速览</strong>
+        <span>3 件事 · 4 个信源</span>
+      </div>
+      <ol class="summary-list">
+        <li>
+          <b>01 · 数字人口播</b>
+          <p>一段人物视频加一条新音频，可生成口型、表情与肢体动作同步的长口播视频。</p>
+        </li>
+        <li>
+          <b>02 · GPT-6 Astra</b>
+          <p>读取屏幕和文件后跨软件连续执行任务，演示产物包括 PCB、3D 场景、PPT、文档与游戏。</p>
+        </li>
+        <li>
+          <b>03 · 个人 AI 协作</b>
+          <p>把 Notion、Flow 和多个 AI 入口重新组织成围绕目标、执行、复盘与交付标准的工作系统。</p>
+        </li>
+      </ol>
     </section>
     <section id="videos" aria-label="视频列表"></section>
     <footer>内容整理自 source 文件夹中的最新文件。</footer>
@@ -49,6 +78,32 @@
   <script id="video-data" type="application/json">[{"title":"我是王青青：开源工具可根据人物视频和新音频生成动作同步的长口播视频","author":"我是王青青","time":"2026-09-05 11:30","url":"https://www.iesdouyin.com/share/video/7681747529500180666/?region=CN\u0026mid=7681747299386559247\u0026u_code=eha529lklb03eb\u0026did=MS4wLjABAAAAqc66dYjg329pQHlas_qW193EO7W_gQzr5veo8LV-rCrBdtapmdO1L3x4bkTp6sz4\u0026iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\u0026with_sec_did=1\u0026video_share_track_ver=\u0026titleType=title\u0026share_sign=bcL.OLU_sF8WH0WtSk9qE.iPUCohjhtUVuiFlVyiLRs-\u0026share_version=290100\u0026ts=1788664476\u0026from_aid=6383\u0026from_ssr=1\u0026share_track_info=%7B%22link_description_type%22%3A%22%22%7D","keywords":["数字人视频","口型与动作同步","AI虚拟主播"],"transcript":"这个开源工具在基础圈刷屏了，只要一段人物视频和一条新音频，它就能生成无限时长音化同步的口播视频，短到30秒的口播，长到2小时的课程讲解，它都能让画面跟着新音频一直往下生成。关键是它不只会对口型，你的表情、点头、转身甚至肢体动作都能跟着语气自然变化。长视频里的人物形象也能保持稳定，一个人读版本问题，多人对话同样支持真人能说，二次元形象也能开口，你甚至上动漫角色用英文讲述形神态和照样的是inside matter attack great to be here. 更接地气的是，官方还给出了comp UI工作流和FX加速方案，照着教程就能搭起来做AI虚拟主播、视频翻译或者视频播客的建议，直接码主需要批量做数字人口播时直接回来抄作业。"},{"title":"我是王青青：GPT-6 Astra 开始自主操作电脑并完成多步骤任务","author":"我是王青青","time":"2026-09-05 15:55","url":"https://www.iesdouyin.com/share/video/7681956783301213413/?region=CN\u0026mid=7681956796864498470\u0026u_code=eha529lklb03eb\u0026did=MS4wLjABAAAAqc66dYjg329pQHlas_qW193EO7W_gQzr5veo8LV-rCrBdtapmdO1L3x4bkTp6sz4\u0026iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\u0026with_sec_did=1\u0026video_share_track_ver=\u0026titleType=title\u0026share_sign=6LAvA_ZbfDLR4PNw.bEfRyeTdPSmzYQMfl.Jmkpxe.U-\u0026share_version=290100\u0026ts=1788664476\u0026from_aid=6383\u0026from_ssr=1\u0026share_track_info=%7B%22link_description_type%22%3A%22%22%7D","keywords":["GPT-6 Astra","电脑操作智能体","AGI与安全"],"transcript":"**标题：**GPT-6发布，AGI真的来了？！ #ai #AGI #GPT6 #山姆奥特曼 #科技\n\n太炸裂了，朋友们，AJI时代可能正式开始了，就在刚刚，OpenAI甩出一张王炸GPT6，取名astra发布会的最后，OpenAI总裁扔下一句话，欢迎来到AJI时代。官方账号呢，也发了一句更神秘的话，群星即将归位。那喊了这么多年的a ji到底走到哪一步了？先看这段宣传片。\n\nCreate a yellow circle there can you draw me a small yellow circle? Done okay take this and make it the window of a rocket ship I like this but can you make it a lot more detailed? Your yellow circle is now the window on a rocket okay, this is awesome now make it a3 d model in blender opening blender, let\u0027s build a presentation for next season\u0027s rain wear for retailers make sure that it feels really high end and that it\u0027s colorful make it fun right? I can help with that. Can you go to eBay and make this listing of this table I bought a few years ago at to flea market? It\u0027s this wild orange table.\n\nSure, OK, yeah, this is awesome. I want you to make a3 d game where I\u0027m ducking asteroids using the arrow keys to move around and I\u0027m using space to boost. Yep, I\u0027m building the game. Also, I\u0027m a little hungry. Can you get me some beef and rice from that spot I ordered from last week? Looking into ordering food so my law firm needs a licensing agreement template. Can you generate a draft template for the lawyers at my firm to have a look at? It\u0027s sure thing. While you\u0027re doing that, I want to play tennis this afternoon, so can you look for a court for me in the lower height checking out? I\u0027ll see what I can find. Can you include the photo that I have of it in my downloads folder? There\u0027s like a slight dent in it. It\u0027s also saved in my downloads folder. Can you put in the description that it\u0027s just slightly damaged? Can you just take the limitation of liability provision, make it a little more favorable to the licensecensor? Okay, I\u0027ve tightened it so the licensecensor\u0027s liability is more narrow.\n\nCapped that looks pretty good. Thanks, can you change the background color to compliment the rain jackets? Oh I love it and what\u0027s going on with my reservation? I found an open court at five PM yeah book it now I want you to make a file I can send to my three d printer. I\u0027ll get working on creating an STL file of this rockcket. 所以这次GPT6不是跑分更高，参数更大，这五个变化才更值得我们关注。第一，它能直接操作电脑了，填表排日程，分析数据越来越多步骤可以交给他执行。第样，你不用全程盯着安装软件测试排查问题，它能自主推进，重要决定在等你确认。第三，他更懂怎么交付成果，文档表格PPT按你的模板做，中途改要求也能接着调整。第四，能力强到需要更严的防护。OpenAI的评估显示。\n\n在具备相应工具和权限时，他能发现未知漏洞并开发利用方法。第五，表现更规矩，推理却更难监督。官方在要求他规避监控的测试中发现了这个问题，这不代表失控，但值得警惕。所以，A ji真来了，光看发布会和跑分还不能下结论。但AI越来越能干活儿，你的判断力就越来越重要。目标怎么定，结果对不对，最后还得你把关，如果让他接手一项工作，你最想甩掉什么？评论区聊聊，关注我，继续分享GPT6的具体用法。"},{"title":"晓辉博士：在兼顾生活与工作的同时重建个人 AI 协作体系","author":"晓辉博士","time":"2026-09-05 21:00","url":"https://www.iesdouyin.com/share/video/7682035411506693497/?region=CN\u0026mid=7682035411291523880\u0026u_code=32f5602h7c3\u0026did=MS4wLjABAAAAPJmnsT5MsEFL2o1nrh8JckJCBjC0c_hEJYWkXHsPlxdv4wCPTpX2XsMLt5hivd5b\u0026iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\u0026with_sec_did=1\u0026video_share_track_ver=\u0026titleType=title\u0026share_sign=56sdIB.mf_Vq3LoH0cepMM_cTejI5UbDKwae8sEBJgU-\u0026share_version=290100\u0026ts=1788627784\u0026from_aid=6383\u0026from_ssr=1\u0026share_track_info=%7B%22link_description_type%22%3A%22%22%7D","keywords":["个人AI协作","超级个体","工作与生活平衡"],"transcript":"**标题：**探索超级个体的第一周 正式进入新一阶段工作状态的第一周，千头万绪、兵荒马乱、注意力爆炸，但保证了家庭时间和锻炼时间，跟AI的新协作体系也正在搭建，感觉还不错。接下来也准备每周末做个本周回顾和小结，记录一下从超级个体到超级团队的发展过程，把自己作为一个实验。#超级个体 #超级团队 #AI #AI协作 #新可能实验室\n\n哈，大家好，今天带孩子来游乐场玩儿啊，我想回顾一下这一周的经历，因为我觉得这一周也是我算进入到新的工作状态的第一周，因为也是孩子开学了之后才有时间聚焦在自己真正想要做的事情上，也是在思考到底AI在这个时代能不能放大我们每个人的可能性啊，因为我接下来想探索的方向就是新可能实验室之前也跟很多老师都有做过一些讨论，包括下一周周一和周四有两场直播，包括北辰青年宋超他在怎么去啊，支持这些超级个体的成长，然后以及像徐健啊，也是一个这个企业家，我这周也去见了他，他们的公司再去落地。F非常有意思，是做全流程的改造，所有的人百分之百都要用上沃克巴，我觉得这两个例子都非常好，然后而且是真的是在推进这个时代的新的一些机会。当然这周。\n\n我的状态除了陪孩子写字读书，然后送孩子上学等等这些我非常想要守住的这个家庭的底线之外，我自己还大概跑了三四次步去做了锻炼，做了肌肉的训练，就是相对来说生活状态比较可控的时候，会有更多的时间去在自己的锻炼上啊，同时他也做了一些这个访谈，对吧，大家看到做访谈这个TCL的孙丽总，然后去了解到底AI在如何落地实体产业，同时呢，还有一些其他的事情在做，那当然这周我觉得给我最大冲击的还是说我在重新去搭建跟I的协作体系，因为上一个阶段的协作体系是之前的啊，比如说记忆系统啊，然后我每周的工作的进展呀，跟进呀，然后工作的总结等等，都是上一个阶段的，然后我这个阶段，其实我还是希望重新搭建一个跟AI协作体系，因为现在的A这么多，比如说像最新的。\n\nG, 这个今天我觉得还是非大，就是还是比前包里包括我的notion啊，我的flow等等吧，就是我其实有多个入口，有多个A，那我怎么把这套体系搭建出来，所以这周我在重点跟AI去讨论这个体系该怎么搭建，标准是什么，然后我就觉得，哼，其实越来越重要的是你要清楚自己的标准，就是你到底想要追求的是一个什么样的生活和工作状态，以及你要做的一件事情。比如说你的这个体系搭建起来，它服务于什么目的，他服务于的你的每一个目的，每一个交付的东西的质量，达到一个什么标准，你才觉得是OK了，才觉得是完成了你的要求。所以我觉得这个标准其实越来越重要，越来越需要你仔细的去思考，到底你想要的是什么？我觉得很多时候，之前我们很容易陷到各种各样的工作细节里，包括我这周也有很多时间。\n\n但是把自己埋在了审核校对字幕上啊，其实包括视频剪辑，包括跟孙俪总的访谈，最后一道的关是我自己要把，所以我的精力、注意力也要花在这些最终要做交付的这些事情上，所以其实你会发现你的时间很容易被一些事情填满啊，那你的时间要花在哪里？其实在一开始的时候，这个规划也好，或者说你的一个标准放在那里也好，其实都有助于AI去理解你，AI去了解你的工作重点和工作方向到底是什么。我觉得现在我还没有搭建起来一个非常让我满意的体系，但是我也在陆陆续续的跟AI去讨论这些标准啊。当然我也觉得好像当一些紧急但不重要的事情出现的时候，我会优先去满足这些事情，像一些一些成果的交付吧，他可能时间就卡在那儿，你的时间投入你也不可能有一个完美的系统出来，所以保证单件事情的交付。\n\n不会是一个优先级非常高的一个事情啊，所以所以这件事情慢慢的就是像你在开飞机一样，就是开着飞机在换油箱的这种感觉，或者说你你希望换一个发动机，但这个发动机需要你在驾驶飞机的状态下去换啊，所以大概就是这种感觉吧，然后可能没有一个完美的状态和方向，然后那今天也是见跟孩子，陪孩子出来玩儿，我还带着电脑出来，又干了一会儿活儿，就也是兵荒马乱的一周吧，但是我觉得还是比以前的状态要好很多，起码我做到了晚上十点钟就可以睡觉啊，晚上10:11点吧，也没那么早，但是早晨就是六七点钟就可以自然醒啊，这还是一个比较大的改变，嗯，也希望下一周有更好的状态啊，然后我们周一晚上的直播和周四晚上两场直播，欢迎大家预约，然后到时候会跟宋超有更多讨论，嗯，拜拜。"},{"title":"清华姜学长：GPT-6 Astra 展示了跨软件执行和纠偏的智能体闭环","author":"清华姜学长","time":"2026-09-05 22:48","url":"https://www.iesdouyin.com/share/video/7682063199097314299/?region=CN\u0026mid=7682063191762406195\u0026u_code=140fl9841825\u0026did=MS4wLjABAAAAC4_iIpTvmhXnotQrWbezTF55voLVkIJ5OPiJPRdIyRrDvcQ9QcqXWfBJUtG0a-c4\u0026iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ\u0026with_sec_did=1\u0026video_share_track_ver=\u0026titleType=title\u0026share_sign=wbUTD35tsToEtq1Z1q9_JOnc0n8nwVPqy_n9y8hQiAY-\u0026share_version=290100\u0026ts=1788637880\u0026from_aid=6383\u0026from_ssr=1\u0026share_track_info=%7B%22link_description_type%22%3A%22%22%7D","keywords":["GPT-6 Astra","智能体闭环","跨软件执行"],"transcript":"**标题：**GPT-6 Astra，可能是GPT-4以来最大里程碑 #gpt6 #astra #大模型 #人工智能 #姜学长\n\n我先下一个判断，GPT6ASSTRA很可能是GP4之后open AI最重要的一次模型更新。Open AI在X上只配了一句话叫做anything can do ona computer cando for you fast, 只要你能在电脑上完成的事情，As都能替你去做，而且很快。那Greatman呢，把这次更新称为了是代剧约签，发布会结束的时候，他还说了一句welcome to a GI error, 欢迎来到a gii时代。那这句话到底有多少水分啊？我呢，今天把官方的修case和技术文档都看了一遍。首先阿斯ster最值得关注的变化是他开始进入了人类正在使用的软件靶项应任务持续的给他做了下去。以前我们看一个模型强不强，通常肯定是看他的一次回答，给他一份资料，他能不能总结，给他一个需求，他能不能写出代码？阿Traa展示的是一条更长的任务轨迹，他先去读屏幕和文件，判断当前状态，然后操作软件界面发生变化以后，这个新画面又会成为下一步的。\n\n个输入，那基础上呢，这个叫做agent loop, 也就是智能体闭环。这里真正难的地方是环境一直在变化，模型每做一个动作，后面的条件都可能去跟着变，他要保留最初的目标，也要根据刚刚发生的结果去调整计划。短任务里一次操作失误可能没有什么，但任务一旦拉长，误差会不断的累积，一个按钮点错了，后面10步都有可能全部走偏。所以长城的agent拼的不只是模型会不会规划，还要看它能不能识别偏差，把任务给它拉回来。官方修case里面我最关注的是KCAD去画PCB啊，阿选拿到一张电路的原理图，然后进入KCAD，摆放元器件，调整布局，连接走线，最后做出一块PCB设计。官方把完整的演示标成了2分54秒，发布页展示的是剪辑后的片段，这个案例的技术含量来自于它同时处理了符号关系和空间关系原理图，告诉模型哪些元器件需要连接。进入PCB布局以后，这些连接还要。\n\n做到具体位置，一个元器件被移动，附近的空间和走线都会受到影响。模型必须知道屏幕上的对象是什么，也要理解刚才的操作改变了哪些条件。这个已经超出了生成一个看起来像PCB的图片，它交出的是一个还能继续编辑的设计文件，但这段演示呢，也不能代表证明它做出了PCB，可以直接去生产复杂工程里边的规则检查、错误恢复和最终的验收，仍然需要真实的项目来去做验证。另外就是它的3DCADB兰和onre engine的演示，这个呢，展示了另一个变化，阿A可以根据多视角的参考图重建三维对象房屋模型完成以后它还能继续放进I6ENGINE，变成可以行走的场景。我们都知道图片提供的是像素，那3D软件需要的是几何结构，物体的前后关系，厚度和比例都要变成可以边界的参数和模型。Asher要把视觉的线索转换成结构，再继续去操。\n\n操做资源软件。这里的关键是中间产物是没有断掉的模型，做出的结果可以进入下一套工具，后面的工作可以直接接着做，这会让看懂图片变成一种生产能力。参考图、网页截图和工程图纸都有可能成为任务的起点。那再聊聊跟普通人的影响，PPT表格、法律文档没有3D场景那么酷炫，但我反而更关注这部分。你看一份直接能够去交付的PPT，需要符合业有模板、标题、层级、页面的布局和图表样式都藏着组织内部的规范。阿Tra会读取模板和资料，然后进入软件完成排版和调整。这类任务同时依赖上下文和工具调用。GP6ASTRAA支持的是105万脱Ken的上下文，理论上，它可以在同一个任务中接触更多的项目资料、历史文件和规范，但是上下文不等于模型什么都记得，更不代表它一定能选对信息，真正有用的能力是在需要的时候找到相关的内容，然后把它带进当前操作。如果这部作文AI。\n\n才有机会理解一家公司的工作方式，而不只是生成一份通用模板。好。另外还有一些修cases，就是赛车游戏和前端QA展示了任务的后半段代码，写完以后模型要把它给运行起来，游戏能不能操作，网页按钮有没有反应，只有进入实际结果才能知道。Astra会观察运行状态，发现问题以后继续处理，这个就是H的loop，很重要的校验模型生成的内容的速度已经很快了，正式工作更容易卡在交付前，结果看起来没问题，但实际一用就报错，就出错我。所以一个可靠的agent需要主动的去寻找反馈，测试结果，报出信息和界面变化都会进入下轮的agent的判断。另外呢，Open AI这是还强化了异步工具的调用和中途引导，一个工具还在运行，2TRA可以先处理不依赖结果的工作，不需要停在那里干等，用户也可以在任务进行中补充要求，模型会把新的信息接回到原来过程，而不是把整个任务推倒重来。这两个功能听起来很工程化，但。\n\n很接近正式工作的样子，很多任务本来就会等待被打断，也会临时改变要求。长城Agent能不能持续工作，很大程度上取决了他怎么去处理这些意外上下文，让它保留任务工具，让它执行校验，负责纠偏。阿特把这几个环节接到了一起。当然目前我们看到的主要是open AI挑选，并且剪辑过的修casese我也没有去拿到。Atraa做到第一手测试设置环境肯定会出现更多异常，他能否稳定恢复，能否拿出足够的检验查证据，还要等大规模使用以后再看。但Black blockman为什么敢说欢迎来到AJ时代，现在已经能看出一点原因了，因为过去我们讨论通用智能，经常盯着是某一个分数，数学有多强，代码写的有多好，考试能不能超过人类，但astra展示出了另一种通用性，同一个模型可以进入陌生的软件，理解当前环境，然后把不同领域的任务继续做下去。这种能力一旦稳定，AI在现实中的角色就会发生变化，他接手的将不再只是几个零散步。\n\n步骤，而是一段原本由人负责的完整工作。GPT6ASTRA算不算AGI，现在也不会有统一答案。也许AGI会先进入软件，安静的接手越来越长的任务，但等我们终于对它的定义达成一致，他们可能就已经和人类一起工作很久了啊。GPT6ASTRA我觉得很可能就是后来我们回看的那个节点。"}]</script>
   <script>
     const videos = JSON.parse(document.getElementById('video-data').textContent);
+    const briefs = [
+      {
+        tools: '人物视频、新音频、ComfyUI 工作流与加速方案',
+        action: '根据新音频连续生成口型、表情、点头、转身和肢体动作，并保持人物形象稳定',
+        result: '约 30 秒至 2 小时的数字人口播视频，可用于虚拟主播、视频翻译和视频播客',
+        status: '视频称工具已开源并提供工作流；当前材料未说明项目名称，具体效果仍需实测'
+      },
+      {
+        tools: 'GPT-6 Astra、屏幕与本地文件，以及浏览器、Blender、办公软件等应用',
+        action: '读取当前界面后自主推进多步骤任务，在执行中接收新要求，并在关键决定前等待确认',
+        result: '3D 模型与游戏、PPT、法律文档、商品信息和日程安排等可交付成果',
+        status: '来自官方发布演示的能力介绍；安全边界和真实环境中的稳定性仍需验证'
+      },
+      {
+        tools: 'Notion、Flow、多个 AI 入口，以及已有的记忆、周进展和复盘机制',
+        action: '围绕生活目标、工作重点和交付标准，重新搭建个人与 AI 的协作体系',
+        result: '目标是形成从任务规划到成果验收的个人工作系统，目前仍处于讨论和搭建阶段',
+        status: '个人实践记录，不是已经完成的产品或可复用方案'
+      },
+      {
+        tools: 'GPT-6 Astra、KiCad、3D 工具、Unreal Engine、办公软件与前端运行环境',
+        action: '读取图纸或参考图，操作软件生成中间产物，再运行、检查反馈并根据错误继续纠偏',
+        result: '可继续编辑的 PCB 设计、可行走的 3D 场景、PPT、表格、文档、游戏和网页修复结果',
+        status: '主要依据官方挑选和剪辑的案例；复杂工程中的规则检查、恢复能力与最终验收尚待实测'
+      }
+    ];
     const esc = (value) => String(value).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     document.getElementById('videos').innerHTML = videos.map((video, index) => `
       <article class="video">
@@ -56,6 +111,12 @@
           <h2>${index + 1}. ${esc(video.title)}</h2>
           <div class="meta"><span>博主：${esc(video.author)}</span><span>发布时间：${esc(video.time)}</span><a href="${esc(video.url)}" target="_blank" rel="noopener noreferrer">打开抖音原视频 ↗</a></div>
           <div class="tags">${video.keywords.map((keyword) => `<span class="tag">${esc(keyword)}</span>`).join('')}</div>
+          <dl class="fact-grid" aria-label="视频要点">
+            <div class="fact"><dt>用了什么</dt><dd>${esc(briefs[index].tools)}</dd></div>
+            <div class="fact"><dt>在做什么</dt><dd>${esc(briefs[index].action)}</dd></div>
+            <div class="fact"><dt>做出什么</dt><dd>${esc(briefs[index].result)}</dd></div>
+            <div class="fact"><dt>当前状态</dt><dd>${esc(briefs[index].status)}</dd></div>
+          </dl>
         </div>
         <details><summary>展开原始文本</summary><div class="transcript"><p class="transcript-label">视频原文</p>${esc(video.transcript)}</div></details>
       </article>`).join('');
