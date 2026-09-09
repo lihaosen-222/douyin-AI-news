@@ -3,7 +3,6 @@
 
 # 抖音 AI 新闻
 
-
 从“得到”的“抖音”知识库中查找当前日期前三天的视频，将内容保存到 `source` 文件夹。
 
 例如今天是 2026 年 9 月 8 日，则整理 9 月 5 日发布的视频，并生成 `source/2026-09-05.md`。
@@ -19,3 +18,26 @@
 5. `当前状态`要区分正式发布、开源、官方演示、个人实践和待验证内容；资料未提及的信息不得猜测。
 6. 保留博主、发布时间、原视频链接、关键词和可折叠的原始文本。
 7. 页面按发布时间排列，并保证手机和电脑上都能清楚阅读。
+
+## 订阅博主
+
+- [AI课代表小明](https://v.douyin.com/26oUrR8wgCM/)
+- [羊叨叨AI](https://v.douyin.com/CHFH25kGYRs/)
+- [怼怼教ai](https://v.douyin.com/d_qZKn2-WIM/)
+- [秋芝2046](https://v.douyin.com/kaOhLfqyAOY/)
+- [Git源宝](https://v.douyin.com/0Q3h1XkIl0I/)
+- [AI便利峰](https://v.douyin.com/8BOR2h03SK4/)
+- [清华姜学长](https://v.douyin.com/J9eUzZaDyV0/)
+- [海洋AI笔记](https://v.douyin.com/pC7JlOUHf7c/)
+- [木子不写代码](https://v.douyin.com/maNQdO66T90/)
+- [数字游牧人Samuel](https://v.douyin.com/9VEufyz2w7g/)
+- [小天fotos](https://v.douyin.com/DPkqZJhwcCk/)
+- [晓辉博士](https://v.douyin.com/GBu4-5_hxAs/)
+- [脑三聊AI](https://v.douyin.com/_lmRtH2MRCA/)
+- [瘦继痕迹](https://v.douyin.com/goyjUoxL5Zk/)
+- [西门聪明蛋XD](https://v.douyin.com/atlgpx3mZKY/)
+- [第四种黑猩猩](https://v.douyin.com/dKRY0F5FxYA/)
+- [卡卡大王(AI版)](https://v.douyin.com/5CUHxFUDZp0/)
+- [技术爬爬虾](https://v.douyin.com/lPo_ZhtS4B8/)
+- [柱子哥TzFilm](https://v.douyin.com/wVIQ9lu2FYs/)
+- [我是王青青](https://v.douyin.com/xBZkch323hw/)
