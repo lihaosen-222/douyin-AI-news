@@ -1,4 +1,8 @@
+访问项目的最新总结：[项目预览链接](https://lihaosen-222.github.io/douyin-AI-news/)
+
+
 # 抖音 AI 新闻
+
 
 从“得到”的“抖音”知识库中查找当前日期前三天的视频，将内容保存到 `source` 文件夹。
 
