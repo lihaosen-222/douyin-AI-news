@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="160" viewBox="0 0 440 160" role="img" aria-label="douyin-AI-news — Every AI Signal, Every Day">
+  <rect x="0.5" y="0.5" width="439" height="159" rx="28" fill="#15161a" stroke="#ffffff" stroke-opacity="0.06"></rect>
+  <g transform="translate(38,34) scale(0.81)">
+    <rect x="8" y="6" width="38" height="50" rx="9" fill="none" stroke="#FAFAFB" stroke-width="3" opacity="0.9"></rect>
+    <g stroke="#FAFAFB" stroke-width="3" stroke-linecap="round">
+      <line x1="16" y1="20" x2="38" y2="20" opacity="0.45"></line>
+      <line x1="16" y1="30" x2="38" y2="30" opacity="0.45"></line>
+      <line x1="16" y1="40" x2="30" y2="40" opacity="0.45"></line>
+    </g>
+    <circle cx="46" cy="46" r="13" fill="#26C6F2"></circle>
+    <path d="M42.4 39.8 L51.4 46 L42.4 52.2 Z" fill="#FAFAFB" stroke="#FAFAFB" stroke-width="1.8" stroke-linejoin="round"></path>
+  </g>
+  <text x="104" y="76" font-family="'Helvetica Neue',Helvetica,Arial,'Segoe UI',sans-serif" font-size="44" font-weight="700" letter-spacing="-1.5">
+    <tspan fill="#FAFAFB">douyin</tspan><tspan fill="#26C6F2">-AI-</tspan><tspan fill="#FAFAFB">news</tspan>
+  </text>
+  <text x="106" y="104" font-family="'Helvetica Neue',Helvetica,Arial,'Segoe UI',sans-serif" font-size="14.5" letter-spacing="0.2" fill="#ffffff" fill-opacity="0.5">Every AI Signal, Every Day</text>
+</svg>
